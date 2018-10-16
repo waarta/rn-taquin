@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 class Title extends Component {
 	render() {
@@ -13,7 +13,7 @@ class Title extends Component {
 
 const styles = StyleSheet.create({
 	titre: {
-		height: 50,
+		height: 40,
 		width: 380,
 		alignItems: "center",
 		justifyContent: "center",

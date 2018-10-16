@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-	Platform,
-	StyleSheet,
-	Text,
-	View,
-	Dimensions,
-	Button
-} from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 
 class PictureSelector extends Component {
 	render() {
