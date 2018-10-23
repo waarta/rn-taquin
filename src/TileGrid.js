@@ -15,11 +15,13 @@ class TileGrid extends Component {
 	componentDidMount() {
 		this.setState({ initialGrid: [...this.state.tilesValues] });
 	}
+	//TODO revoir le reset apres un new
 	componentDidUpdate(prevProps) {
 		if (this.props.new !== prevProps.new) {
 			this.setState({
 				tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0])
 			});
+			//this.setState({ initialGrid: [...this.state.tilesValues] });
 		}
 		if (this.props.reset !== prevProps.reset) {
 			this.setState({
