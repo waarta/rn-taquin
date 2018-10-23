@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
 class Tile extends Component {
@@ -9,25 +9,28 @@ class Tile extends Component {
 
 	render() {
 		return (
-			<View
-				style={[
-					styles.tile,
-					{
-						width: this.props.tileSize,
-						height: this.props.tileSize
-					}
-				]}
-			>
-				<Text style={styles.txtTile}>
-					{this.props.value != 0 ? this.props.value : ""}
-				</Text>
-			</View>
+			<TouchableOpacity onPress={this.props.onPress}>
+				<View
+					style={[
+						styles.tile,
+						{
+							width: this.props.tileSize,
+							height: this.props.tileSize
+						}
+					]}
+				>
+					<Text style={styles.txtTile}>
+						{this.props.value != 0 ? this.props.value : ""}
+					</Text>
+				</View>
+			</TouchableOpacity>
 		);
 	}
 }
 Tile.propTypes = {
 	tileSize: PropTypes.number.isRequired,
-	value: PropTypes.number.isRequired
+	value: PropTypes.number.isRequired,
+	onPress: PropTypes.func
 };
 
 const styles = StyleSheet.create({

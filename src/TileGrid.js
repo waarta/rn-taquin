@@ -6,16 +6,22 @@ import Tile from "./Tile.js";
 class TileGrid extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { tilesValues: this.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]) };
+		this.state = {
+			tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]),
+			initialGrid: []
+		};
 	}
 
-	shuffle(array) {
-		var rand = Math.floor(Math.random() * 100);
+	componentDidMount() {
+		this.setState({ initialGrid: [...this.state.tilesValues] });
+	}
+
+	myShuffle(array) {
+		var rand = Math.floor(Math.random() * 1000);
 		var voisins;
 		for (let i = 0; i < rand; i++) {
 			voisins = this.getVoisins(array, 0);
 			var indexVoisinRand = voisins[Math.floor(Math.random() * voisins.length)];
-			var temp = array[indexVoisinRand];
 			array[array.indexOf(0)] = array[indexVoisinRand];
 			array[indexVoisinRand] = 0;
 		}
@@ -54,6 +60,17 @@ class TileGrid extends Component {
 		}
 	}
 
+	tilePress(tileNumber) {
+		var vois = this.getVoisins(this.state.tilesValues, 0);
+		var newTilesValues = [...this.state.tilesValues];
+		if (vois.includes(tileNumber)) {
+			var a = newTilesValues[tileNumber];
+			newTilesValues[newTilesValues.indexOf(0)] = newTilesValues[tileNumber];
+			newTilesValues[tileNumber] = 0;
+			this.setState({ tilesValues: [...newTilesValues] });
+		}
+	}
+
 	render() {
 		return (
 			<View
@@ -71,14 +88,17 @@ class TileGrid extends Component {
 							<Tile
 								tileSize={this.props.dimension / 3}
 								value={this.state.tilesValues[i * 3]}
+								onPress={this.tilePress.bind(this, i * 3)}
 							/>
 							<Tile
 								tileSize={this.props.dimension / 3}
 								value={this.state.tilesValues[i * 3 + 1]}
+								onPress={this.tilePress.bind(this, i * 3 + 1)}
 							/>
 							<Tile
 								tileSize={this.props.dimension / 3}
 								value={this.state.tilesValues[i * 3 + 2]}
+								onPress={this.tilePress.bind(this, i * 3 + 2)}
 							/>
 						</View>
 					);
