@@ -27,10 +27,12 @@ class Tile extends Component {
 		);
 	}
 }
+
 Tile.propTypes = {
 	tileSize: PropTypes.number.isRequired,
 	value: PropTypes.number.isRequired,
-	onPress: PropTypes.func
+	onPress: PropTypes.func,
+	active: PropTypes.bool
 };
 
 const styles = StyleSheet.create({

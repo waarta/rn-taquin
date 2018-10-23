@@ -9,7 +9,7 @@ class Score extends Component {
 	render() {
 		return (
 			<View style={styles.score}>
-				<Text>Score: {this.props.score}</Text>
+				<Text style={styles.txt}>Score: {this.props.score}</Text>
 			</View>
 		);
 	}
@@ -22,6 +22,9 @@ Score.propTypes = {
 const styles = StyleSheet.create({
 	score: {
 		margin: 10
+	},
+	txt: {
+		fontSize: 18
 	}
 });
 export default Score;

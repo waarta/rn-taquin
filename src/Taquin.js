@@ -11,7 +11,10 @@ class Taquin extends Component {
 		super(props);
 		this.state = {
 			dimensionGrid: 0,
-			score: 0
+			score: 0,
+			active: true,
+			new: false,
+			reset: false
 		};
 	}
 
@@ -23,14 +26,60 @@ class Taquin extends Component {
 		else this.setState({ dimensionGrid: Math.round(height - 20) });
 	}
 
+	setScore() {
+		this.setState(oldState => {
+			return {
+				score: oldState.score + 1
+			};
+		});
+	}
+
+	resetScore() {
+		this.setState({ score: 0 });
+	}
+
+	isOver() {
+		this.setState({ active: false });
+	}
+
+	newGame() {
+		this.setState(oldState => {
+			return {
+				new: !oldState.new
+			};
+		});
+		this.resetScore();
+	}
+
+	resetGame() {
+		this.setState(oldState => {
+			return {
+				reset: !oldState.reset
+			};
+		});
+		this.resetScore();
+	}
+
 	render() {
 		return (
 			<View style={styles.container} onLayout={this.onLayout.bind(this)}>
 				<Title />
 				<Score score={this.state.score} />
-				<TileGrid dimension={this.state.dimensionGrid} />
+				<TileGrid
+					dimension={this.state.dimensionGrid}
+					setScore={this.setScore.bind(this)}
+					active={this.state.active}
+					isOver={this.isOver.bind(this)}
+					new={this.state.new}
+					reset={this.state.reset}
+				/>
 				<PictureSelector />
-				<Footer />
+				<Footer
+					new={this.state.new}
+					newGame={this.newGame.bind(this)}
+					reset={this.state.reset}
+					resetGame={this.resetGame.bind(this)}
+				/>
 			</View>
 		);
 	}

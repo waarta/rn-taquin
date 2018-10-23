@@ -15,6 +15,18 @@ class TileGrid extends Component {
 	componentDidMount() {
 		this.setState({ initialGrid: [...this.state.tilesValues] });
 	}
+	componentDidUpdate(prevProps) {
+		if (this.props.new !== prevProps.new) {
+			this.setState({
+				tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0])
+			});
+		}
+		if (this.props.reset !== prevProps.reset) {
+			this.setState({
+				tilesValues: [...this.state.initialGrid]
+			});
+		}
+	}
 
 	myShuffle(array) {
 		var rand = Math.floor(Math.random() * 1000);
@@ -63,12 +75,14 @@ class TileGrid extends Component {
 	tilePress(tileNumber) {
 		var vois = this.getVoisins(this.state.tilesValues, 0);
 		var newTilesValues = [...this.state.tilesValues];
-		if (vois.includes(tileNumber)) {
-			var a = newTilesValues[tileNumber];
+		if (vois.includes(tileNumber) && this.props.active) {
 			newTilesValues[newTilesValues.indexOf(0)] = newTilesValues[tileNumber];
 			newTilesValues[tileNumber] = 0;
 			this.setState({ tilesValues: [...newTilesValues] });
+			this.props.setScore();
 		}
+		if (this.state.tilesValues == [1, 2, 3, 4, 5, 6, 7, 8, 0])
+			this.props.isOver();
 	}
 
 	render() {
@@ -108,7 +122,12 @@ class TileGrid extends Component {
 	}
 }
 TileGrid.propTypes = {
-	dimension: PropTypes.number.isRequired
+	dimension: PropTypes.number.isRequired,
+	setScore: PropTypes.func.isRequired,
+	isOver: PropTypes.func.isRequired,
+	active: PropTypes.bool.isRequired,
+	new: PropTypes.bool.isRequired,
+	reset: PropTypes.bool.isRequired
 };
 
 const styles = StyleSheet.create({
