@@ -130,7 +130,8 @@ TileGrid.propTypes = {
 	isOver: PropTypes.func.isRequired,
 	active: PropTypes.bool.isRequired,
 	new: PropTypes.bool.isRequired,
-	reset: PropTypes.bool.isRequired
+	reset: PropTypes.bool.isRequired,
+	sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
 };
 
 const styles = StyleSheet.create({

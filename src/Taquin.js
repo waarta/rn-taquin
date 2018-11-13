@@ -14,7 +14,9 @@ class Taquin extends Component {
 			score: 0,
 			active: true,
 			new: false,
-			reset: false
+			reset: false,
+			changePic: false,
+			uriPicture:""
 		};
 	}
 
@@ -60,6 +62,14 @@ class Taquin extends Component {
 		this.resetScore();
 	}
 
+	changerPicture() {
+		this.setState(oldState => {
+			return {
+				changePic: !oldState.changePic
+			};
+		});
+	}
+
 	render() {
 		return (
 			<View style={styles.container} onLayout={this.onLayout.bind(this)}>
@@ -72,8 +82,11 @@ class Taquin extends Component {
 					isOver={this.isOver.bind(this)}
 					new={this.state.new}
 					reset={this.state.reset}
+					sourcePicture={}
 				/>
-				<PictureSelector />
+				<PictureSelector changePic={this.state.changePic}
+					changerPicture={this.changerPicture.bind(this)}
+				/>
 				<Footer
 					new={this.state.new}
 					newGame={this.newGame.bind(this)}
@@ -91,5 +104,6 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	}
 });
+
 
 export default Taquin;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
 class Tile extends Component {
@@ -8,21 +8,47 @@ class Tile extends Component {
 	}
 
 	render() {
+		var y = Math.abs((this.props.value - 1) % 3);
+		var x = Math.abs(Math.trunc((this.props.value - 1) / 3));
+
 		return (
 			<TouchableOpacity onPress={this.props.onPress}>
-				<View
-					style={[
-						styles.tile,
-						{
-							width: this.props.tileSize,
-							height: this.props.tileSize
-						}
-					]}
-				>
-					<Text style={styles.txtTile}>
-						{this.props.value != 0 ? this.props.value : ""}
-					</Text>
-				</View>
+				{this.props.value != 0 ? (
+					<View
+						style={[
+							styles.tile,
+							{
+								width: this.props.tileSize,
+								height: this.props.tileSize,
+								overflow: "hidden"
+							}
+						]}
+					>
+						<Image
+							source={require("../img/canards.jpg")}
+							resizeMode="cover"
+							style={{
+								width: this.props.tileSize * 3,
+								height: this.props.tileSize * 3,
+								position: "absolute",
+								top: -(x * this.props.tileSize),
+								left: -(y * this.props.tileSize)
+							}}
+						/>
+						<Text style={styles.txtTile}>{this.props.value}</Text>
+					</View>
+				) : (
+					<View
+						style={[
+							styles.tile,
+							{
+								width: this.props.tileSize,
+								height: this.props.tileSize,
+								overflow: "hidden"
+							}
+						]}
+					/>
+				)}
 			</TouchableOpacity>
 		);
 	}
