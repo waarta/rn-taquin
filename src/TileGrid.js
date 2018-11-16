@@ -8,7 +8,9 @@ class TileGrid extends Component {
 		super(props);
 		this.state = {
 			tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]),
-			initialGrid: []
+			//tilesValues: [1, 2, 3, 4, 5, 6, 7, 0, 8],
+			initialGrid: [],
+			sourcePic: require("../img/canards.jpg")
 		};
 	}
 
@@ -27,6 +29,11 @@ class TileGrid extends Component {
 		if (this.props.reset !== prevProps.reset) {
 			this.setState({
 				tilesValues: [...this.state.initialGrid]
+			});
+		}
+		if (this.props.changePic !== prevProps.changePic) {
+			this.setState({
+				sourcePic: this.props.sourcePicture
 			});
 		}
 	}
@@ -84,7 +91,10 @@ class TileGrid extends Component {
 			this.setState({ tilesValues: [...newTilesValues] });
 			this.props.setScore();
 		}
-		if (this.state.tilesValues == [1, 2, 3, 4, 5, 6, 7, 8, 0])
+		if (
+			JSON.stringify(newTilesValues) ==
+			JSON.stringify([1, 2, 3, 4, 5, 6, 7, 8, 0])
+		)
 			this.props.isOver();
 	}
 
@@ -106,16 +116,19 @@ class TileGrid extends Component {
 								tileSize={this.props.dimension / 3}
 								value={this.state.tilesValues[i * 3]}
 								onPress={this.tilePress.bind(this, i * 3)}
+								sourcePicture={this.state.sourcePic}
 							/>
 							<Tile
 								tileSize={this.props.dimension / 3}
 								value={this.state.tilesValues[i * 3 + 1]}
 								onPress={this.tilePress.bind(this, i * 3 + 1)}
+								sourcePicture={this.state.sourcePic}
 							/>
 							<Tile
 								tileSize={this.props.dimension / 3}
 								value={this.state.tilesValues[i * 3 + 2]}
 								onPress={this.tilePress.bind(this, i * 3 + 2)}
+								sourcePicture={this.state.sourcePic}
 							/>
 						</View>
 					);
@@ -131,7 +144,8 @@ TileGrid.propTypes = {
 	active: PropTypes.bool.isRequired,
 	new: PropTypes.bool.isRequired,
 	reset: PropTypes.bool.isRequired,
-	sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
+	sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+	changePic: PropTypes.bool.isRequired
 };
 
 const styles = StyleSheet.create({

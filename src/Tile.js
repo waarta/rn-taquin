@@ -25,7 +25,7 @@ class Tile extends Component {
 						]}
 					>
 						<Image
-							source={require("../img/canards.jpg")}
+							source={this.props.sourcePicture}
 							resizeMode="cover"
 							style={{
 								width: this.props.tileSize * 3,
@@ -58,7 +58,8 @@ Tile.propTypes = {
 	tileSize: PropTypes.number.isRequired,
 	value: PropTypes.number.isRequired,
 	onPress: PropTypes.func,
-	active: PropTypes.bool
+	active: PropTypes.bool,
+	sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
 };
 
 const styles = StyleSheet.create({
@@ -70,7 +71,9 @@ const styles = StyleSheet.create({
 		borderColor: "black"
 	},
 	txtTile: {
-		fontSize: 28
+		fontSize: 28,
+		left: -40,
+		top: -40
 	}
 });
 export default Tile;

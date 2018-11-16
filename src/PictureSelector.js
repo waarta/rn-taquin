@@ -9,11 +9,11 @@ class PictureSelector extends Component {
 		}
 	}
 
-	/*changeImage() {
-		var imgActuel = imgs.indexOf(this.state.image);
-		var i = imgActuel < imgs.length - 1 ? imgActuel + 1 : 0;
-		this.setState({ image: imgs[i] });
-	}*/
+	changeImage() {
+		var a = Math.floor(Math.random() * imgs.length);
+		this.props.setPicture(imgs[a]);
+	}
+
 	render() {
 		return (
 			<View style={styles.pictureSelect}>
@@ -29,7 +29,8 @@ class PictureSelector extends Component {
 
 PictureSelector.propTypes = {
 	changerPicture: PropTypes.func,
-	changePic: PropTypes.bool
+	changePic: PropTypes.bool,
+	setPicture: PropTypes.func
 };
 
 const imgs = [
@@ -37,7 +38,8 @@ const imgs = [
 	require("../img/biere.png"),
 	require("../img/cinema.jpeg"),
 	require("../img/maison.jpeg"),
-	require("../img/paysage.jpeg")
+	require("../img/paysage.jpeg"),
+	require("../img/canards.jpg")
 ];
 
 const styles = StyleSheet.create({

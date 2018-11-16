@@ -16,7 +16,7 @@ class Taquin extends Component {
 			new: false,
 			reset: false,
 			changePic: false,
-			uriPicture:""
+			uriPicture: require("../img/canards.jpg")
 		};
 	}
 
@@ -70,6 +70,10 @@ class Taquin extends Component {
 		});
 	}
 
+	setPicture(uri) {
+		this.setState({ uriPicture: uri });
+	}
+
 	render() {
 		return (
 			<View style={styles.container} onLayout={this.onLayout.bind(this)}>
@@ -82,10 +86,13 @@ class Taquin extends Component {
 					isOver={this.isOver.bind(this)}
 					new={this.state.new}
 					reset={this.state.reset}
-					sourcePicture={}
+					sourcePicture={this.state.uriPicture}
+					changePic={this.state.changePic}
 				/>
-				<PictureSelector changePic={this.state.changePic}
+				<PictureSelector
+					changePic={this.state.changePic}
 					changerPicture={this.changerPicture.bind(this)}
+					setPicture={this.setPicture.bind(this)}
 				/>
 				<Footer
 					new={this.state.new}
@@ -104,6 +111,5 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	}
 });
-
 
 export default Taquin;
