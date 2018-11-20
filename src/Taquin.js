@@ -15,7 +15,6 @@ class Taquin extends Component {
 			active: true,
 			new: false,
 			reset: false,
-			changePic: false,
 			uriPicture: require("../img/canards.jpg")
 		};
 	}
@@ -62,14 +61,6 @@ class Taquin extends Component {
 		this.resetScore();
 	}
 
-	changerPicture() {
-		this.setState(oldState => {
-			return {
-				changePic: !oldState.changePic
-			};
-		});
-	}
-
 	setPicture(uri) {
 		this.setState({ uriPicture: uri });
 	}
@@ -87,13 +78,8 @@ class Taquin extends Component {
 					new={this.state.new}
 					reset={this.state.reset}
 					sourcePicture={this.state.uriPicture}
-					changePic={this.state.changePic}
 				/>
-				<PictureSelector
-					changePic={this.state.changePic}
-					changerPicture={this.changerPicture.bind(this)}
-					setPicture={this.setPicture.bind(this)}
-				/>
+				<PictureSelector setPicture={this.setPicture.bind(this)} />
 				<Footer
 					new={this.state.new}
 					newGame={this.newGame.bind(this)}
