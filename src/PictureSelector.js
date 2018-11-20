@@ -7,7 +7,6 @@ class PictureSelector extends Component {
 	changeImage() {
 		ImagePicker.showImagePicker(options, response => {
 			console.log("Response = ", response);
-
 			if (response.didCancel) {
 				console.log("User cancelled image picker");
 			} else if (response.error) {

@@ -5,6 +5,8 @@ import Score from "./Score.js";
 import TileGrid from "./TileGrid.js";
 import PictureSelector from "./PictureSelector.js";
 import Footer from "./Footer.js";
+import { createStackNavigator } from "react-navigation";
+import Information from "../Information.js";
 
 class Taquin extends Component {
 	constructor(props) {
