@@ -33,7 +33,10 @@ const styles = StyleSheet.create({
 		flexDirection: "row"
 	},
 	button: {
-		margin: 50,
+		marginTop: 0,
+		marginBottom: 0,
+		marginLeft: 50,
+		marginRight: 50,
 		width: 100
 	}
 });

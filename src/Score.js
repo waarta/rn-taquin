@@ -21,7 +21,7 @@ Score.propTypes = {
 
 const styles = StyleSheet.create({
 	score: {
-		margin: 10
+		marginBottom: 10
 	},
 	txt: {
 		fontSize: 18

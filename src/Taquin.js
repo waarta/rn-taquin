@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
-import Title from "./Title.js";
+import { StyleSheet, View, Button } from "react-native";
 import Score from "./Score.js";
 import TileGrid from "./TileGrid.js";
 import PictureSelector from "./PictureSelector.js";
 import Footer from "./Footer.js";
-import { createStackNavigator } from "react-navigation";
-import Information from "../Information.js";
+import Title from "./Title.js";
 
 class Taquin extends Component {
+	static navigationOptions = ({ navigation }) => {
+		return {
+			headerTitle: <Title navigation={navigation} />
+		};
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -70,7 +74,6 @@ class Taquin extends Component {
 	render() {
 		return (
 			<View style={styles.container} onLayout={this.onLayout.bind(this)}>
-				<Title />
 				<Score score={this.state.score} />
 				<TileGrid
 					dimension={this.state.dimensionGrid}

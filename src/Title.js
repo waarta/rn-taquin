@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 
 class Title extends Component {
+	constructor(props) {
+		super(props);
+	}
 	render() {
+		const navigate = this.props.navigation.navigate;
+		console.log(navigate);
 		return (
 			<View style={styles.titre}>
 				<Text style={styles.txt}>Mon Taquin</Text>
+				<Button title="info" onPress={() => navigate("Informations")} />
 			</View>
 		);
 	}
@@ -13,14 +19,16 @@ class Title extends Component {
 
 const styles = StyleSheet.create({
 	titre: {
-		height: 40,
-		width: 380,
-		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: "#DCDCDC"
+		flex: 1,
+		flexDirection: "row",
+		justifyContent: "space-between"
 	},
 	txt: {
-		fontSize: 28
+		fontSize: 28,
+		margin: 10
+	},
+	btn: {
+		height: 20
 	}
 });
 
