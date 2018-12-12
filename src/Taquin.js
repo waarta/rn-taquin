@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Button } from "react-native";
+import { StyleSheet, View, AsyncStorage } from "react-native";
 import Score from "./Score.js";
 import TileGrid from "./TileGrid.js";
 import PictureSelector from "./PictureSelector.js";
@@ -23,8 +23,33 @@ class Taquin extends Component {
 			reset: false,
 			uriPicture: require("../img/canards.jpg")
 		};
+		//this._storeData(this.state.score);
 	}
+	/* stockage de données */
+	/*_storeData = async score => {
+		try {
+			await AsyncStorage.setItem("score_1", score);
+		} catch (error) {
+			// Error saving data
+			console.log("error", error.message);
+		}
+	};
 
+	_retrieveData = async () => {
+		let data = -1;
+		try {
+			data = await AsyncStorage.getItem("score_1");
+			if (data !== null) {
+				// We have data!!
+				console.log(data);
+			}
+		} catch (error) {
+			// Error retrieving data
+			console.log(error.message);
+		}
+		return data;
+	};
+*/
 	onLayout(event) {
 		var width = event.nativeEvent.layout.width;
 		var height = event.nativeEvent.layout.height;
