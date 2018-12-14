@@ -7,7 +7,6 @@ class Title extends Component {
 	}
 	render() {
 		const navigate = this.props.navigation.navigate;
-		console.log(navigate);
 		return (
 			<View style={styles.titre}>
 				<Text style={styles.txt}>Mon Taquin</Text>

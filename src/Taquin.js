@@ -23,33 +23,19 @@ class Taquin extends Component {
 			reset: false,
 			uriPicture: require("../img/canards.jpg")
 		};
-		//this._storeData(this.state.score);
+		this._storeData(this.state.score);
 	}
+
 	/* stockage de données */
-	/*_storeData = async score => {
+	_storeData = async score => {
+		console.log("save");
 		try {
-			await AsyncStorage.setItem("score_1", score);
+			await AsyncStorage.setItem("Score", score + "");
 		} catch (error) {
-			// Error saving data
-			console.log("error", error.message);
+			console.log(error.message);
 		}
 	};
 
-	_retrieveData = async () => {
-		let data = -1;
-		try {
-			data = await AsyncStorage.getItem("score_1");
-			if (data !== null) {
-				// We have data!!
-				console.log(data);
-			}
-		} catch (error) {
-			// Error retrieving data
-			console.log(error.message);
-		}
-		return data;
-	};
-*/
 	onLayout(event) {
 		var width = event.nativeEvent.layout.width;
 		var height = event.nativeEvent.layout.height;
@@ -64,10 +50,12 @@ class Taquin extends Component {
 				score: oldState.score + 1
 			};
 		});
+		this._storeData(this.state.score);
 	}
 
 	resetScore() {
 		this.setState({ score: 0 });
+		this._storeData(this.state.score);
 	}
 
 	isOver() {
