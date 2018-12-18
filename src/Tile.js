@@ -12,7 +12,10 @@ class Tile extends Component {
 		var x = Math.abs(Math.trunc((this.props.value - 1) / 3));
 
 		return (
-			<TouchableOpacity onPress={this.props.onPress}>
+			<TouchableOpacity
+				disabled={!this.props.active}
+				onPress={this.props.onPress}
+			>
 				{this.props.value != 0 ? (
 					<View
 						style={[
@@ -59,6 +62,7 @@ Tile.propTypes = {
 	value: PropTypes.number.isRequired,
 	onPress: PropTypes.func,
 	active: PropTypes.bool,
+	active: PropTypes.bool.isRequired,
 	sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
 };
 

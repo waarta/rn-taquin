@@ -7,8 +7,8 @@ class TileGrid extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]),
-			//tilesValues: [1, 2, 3, 4, 5, 6, 7, 0, 8],
+			//tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]),
+			tilesValues: [1, 2, 3, 4, 5, 6, 7, 0, 8],
 			initialGrid: []
 		};
 	}
@@ -107,6 +107,7 @@ class TileGrid extends Component {
 					return (
 						<View key={"row_" + i} style={styles.tileRow}>
 							<Tile
+								active={this.props.active}
 								tileSize={this.props.dimension / 3}
 								value={this.state.tilesValues[i * 3]}
 								onPress={this.tilePress.bind(this, i * 3)}
@@ -114,12 +115,14 @@ class TileGrid extends Component {
 							/>
 							<Tile
 								tileSize={this.props.dimension / 3}
+								active={this.props.active}
 								value={this.state.tilesValues[i * 3 + 1]}
 								onPress={this.tilePress.bind(this, i * 3 + 1)}
 								sourcePicture={this.props.sourcePicture}
 							/>
 							<Tile
 								tileSize={this.props.dimension / 3}
+								active={this.props.active}
 								value={this.state.tilesValues[i * 3 + 2]}
 								onPress={this.tilePress.bind(this, i * 3 + 2)}
 								sourcePicture={this.props.sourcePicture}

@@ -68,6 +68,7 @@ class Taquin extends Component {
 				new: !oldState.new
 			};
 		});
+		this.setState({ active: true });
 		this.resetScore();
 	}
 
@@ -77,6 +78,7 @@ class Taquin extends Component {
 				reset: !oldState.reset
 			};
 		});
+		this.setState({ active: true });
 		this.resetScore();
 	}
 
