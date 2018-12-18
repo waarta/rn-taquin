@@ -21,18 +21,35 @@ class Taquin extends Component {
 			active: true,
 			new: false,
 			reset: false,
-			uriPicture: require("../img/canards.jpg")
+			uriPicture: require("../img/canards.jpg"),
+			initialGrid: []
 		};
-		this._storeData(this.state.score);
 	}
 
 	/* stockage de données */
-	_storeData = async score => {
-		console.log("save");
+	_storeData = async () => {
+		let games;
+		let current = {
+			grid: this.state.initialGrid,
+			score: this.state.score,
+			picture: this.state.picture
+		};
 		try {
-			await AsyncStorage.setItem("Score", score + "");
+			games = await AsyncStorage.getItem("Games");
+			games = JSON.parse(games);
 		} catch (error) {
-			console.log(error.message);
+			console.log("get", error.message);
+		}
+
+		try {
+			if (games != null)
+				await AsyncStorage.setItem(
+					"Games",
+					JSON.stringify([...games, current])
+				);
+			else await AsyncStorage.setItem("Games", JSON.stringify([current]));
+		} catch (error) {
+			console.log("set", error);
 		}
 	};
 
@@ -42,6 +59,7 @@ class Taquin extends Component {
 		if (width < height)
 			this.setState({ dimensionGrid: Math.round(width - 20) });
 		else this.setState({ dimensionGrid: Math.round(height - 20) });
+		//AsyncStorage.clear();
 	}
 
 	setScore() {
@@ -50,16 +68,15 @@ class Taquin extends Component {
 				score: oldState.score + 1
 			};
 		});
-		this._storeData(this.state.score);
 	}
 
 	resetScore() {
 		this.setState({ score: 0 });
-		this._storeData(this.state.score);
 	}
 
 	isOver() {
 		this.setState({ active: false });
+		this._storeData(this.state.score + 1);
 	}
 
 	newGame() {
@@ -86,6 +103,10 @@ class Taquin extends Component {
 		this.setState({ uriPicture: uri });
 	}
 
+	setInitialGrid(tab) {
+		this.setState({ initialGrid: [...tab] });
+	}
+
 	render() {
 		return (
 			<View style={styles.container} onLayout={this.onLayout.bind(this)}>
@@ -98,6 +119,7 @@ class Taquin extends Component {
 					new={this.state.new}
 					reset={this.state.reset}
 					sourcePicture={this.state.uriPicture}
+					setInitialGrid={this.setInitialGrid.bind(this)}
 				/>
 				<PictureSelector setPicture={this.setPicture.bind(this)} />
 				<Footer

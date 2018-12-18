@@ -4,21 +4,18 @@ import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 class HistoScore extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { scores: [] };
+		this.state = { games: [] };
 	}
 
 	componentDidMount() {
-		this._retrieveData("Score");
+		this._retrieveData();
 	}
 
-	_retrieveData = async key => {
-		console.log("value");
+	_retrieveData = async () => {
 		try {
-			const value = await AsyncStorage.getItem(key);
+			const value = await AsyncStorage.getItem("Games");
 			if (value !== null) {
-				console.log(value);
-				this.setState({ scores: value });
-				console.log("e", this.state.scores);
+				this.setState({ games: JSON.parse(value) });
 			}
 		} catch (error) {
 			console.log("error", error.message);
@@ -26,11 +23,18 @@ class HistoScore extends Component {
 	};
 
 	render() {
+		let games = this.state.games;
 		return (
 			<View>
 				<Text style={styles.titre}>Historique des Scores </Text>
 				<View>
-					<Text>Score: {this.state.scores[0]} </Text>
+					{games.map((game, i) => {
+						return (
+							<Text key={"game_" + i}>
+								{game.grid} -> {game.score}{" "}
+							</Text>
+						);
+					})}
 				</View>
 			</View>
 		);

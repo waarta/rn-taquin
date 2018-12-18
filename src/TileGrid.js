@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, AsyncStorage, View } from "react-native";
 import PropTypes from "prop-types";
 import Tile from "./Tile.js";
 
@@ -12,9 +12,9 @@ class TileGrid extends Component {
 			initialGrid: []
 		};
 	}
-
 	componentDidMount() {
 		this.setState({ initialGrid: [...this.state.tilesValues] });
+		this.props.setInitialGrid(this.state.tilesValues);
 	}
 
 	componentDidUpdate(prevProps) {
@@ -141,7 +141,8 @@ TileGrid.propTypes = {
 	active: PropTypes.bool.isRequired,
 	new: PropTypes.bool.isRequired,
 	reset: PropTypes.bool.isRequired,
-	sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
+	sourcePicture: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+	setInitialGrid: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
