@@ -27,7 +27,7 @@ class PictureSelector extends Component {
 			<View style={styles.pictureSelect}>
 				<Button
 					onPress={this.changeImage.bind(this)}
-					title="PictureSelector"
+					title="Choose picture"
 					color="#1E90FF"
 				/>
 			</View>

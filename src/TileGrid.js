@@ -7,8 +7,8 @@ class TileGrid extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			//tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]),
-			tilesValues: [1, 2, 3, 4, 5, 6, 7, 0, 8],
+			tilesValues: this.myShuffle([1, 2, 3, 4, 5, 6, 7, 8, 0]),
+			//tilesValues: [1, 2, 3, 4, 5, 6, 7, 0, 8],
 			initialGrid: []
 		};
 	}

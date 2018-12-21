@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: "white",
-		borderWidth: 1,
+		borderWidth: 0.6,
 		borderColor: "black"
 	},
 	txtTile: {

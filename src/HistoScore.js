@@ -38,16 +38,19 @@ class HistoScore extends Component {
 		return (
 			<View>
 				<View style={styles.container}>
-					<Text style={styles.txt}>Historique des Scores</Text>
-					<TouchableOpacity onPress={this.clearHisto.bind(this)}>
-						<Text style={styles.txt}>X</Text>
+					<Text style={styles.titre}>Historique des Scores</Text>
+					<TouchableOpacity
+						style={styles.btn}
+						onPress={this.clearHisto.bind(this)}
+					>
+						<Text style={styles.titre}>X</Text>
 					</TouchableOpacity>
 				</View>
 				<View>
 					{games.map((game, i) => {
 						return (
-							<Text key={"game_" + i}>
-								{game.grid} -> {game.score}{" "}
+							<Text style={styles.score} key={"game_" + i}>
+								[{game.grid}] => score: {game.score}{" "}
 							</Text>
 						);
 					})}
@@ -59,17 +62,16 @@ class HistoScore extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: "row"
+		flexDirection: "row",
+		justifyContent: "space-between"
 	},
-	txt: {
+	titre: {
 		fontSize: 20,
 		margin: 10
 	},
-	btn: {
-		marginRight: 0,
-		backgroundColor: "transparent",
-		width: 100,
-		height: 20
+	score: {
+		fontSize: 15,
+		margin: 15
 	}
 });
 
