@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, AsyncStorage } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	AsyncStorage,
+	TouchableOpacity
+} from "react-native";
 
 class HistoScore extends Component {
 	constructor(props) {
@@ -22,11 +28,21 @@ class HistoScore extends Component {
 		}
 	};
 
+	clearHisto() {
+		AsyncStorage.clear();
+		this.setState({ games: [] });
+	}
+
 	render() {
 		let games = this.state.games;
 		return (
 			<View>
-				<Text style={styles.titre}>Historique des Scores </Text>
+				<View style={styles.container}>
+					<Text style={styles.txt}>Historique des Scores</Text>
+					<TouchableOpacity onPress={this.clearHisto.bind(this)}>
+						<Text style={styles.txt}>X</Text>
+					</TouchableOpacity>
+				</View>
 				<View>
 					{games.map((game, i) => {
 						return (
@@ -42,11 +58,18 @@ class HistoScore extends Component {
 }
 
 const styles = StyleSheet.create({
-	titre: {
-		fontSize: 20
+	container: {
+		flexDirection: "row"
 	},
 	txt: {
-		fontSize: 18
+		fontSize: 20,
+		margin: 10
+	},
+	btn: {
+		marginRight: 0,
+		backgroundColor: "transparent",
+		width: 100,
+		height: 20
 	}
 });
 

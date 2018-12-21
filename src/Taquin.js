@@ -31,7 +31,7 @@ class Taquin extends Component {
 		let games;
 		let current = {
 			grid: this.state.initialGrid,
-			score: this.state.score,
+			score: this.state.score + 1,
 			picture: this.state.picture
 		};
 		try {
@@ -59,7 +59,6 @@ class Taquin extends Component {
 		if (width < height)
 			this.setState({ dimensionGrid: Math.round(width - 20) });
 		else this.setState({ dimensionGrid: Math.round(height - 20) });
-		//AsyncStorage.clear();
 	}
 
 	setScore() {
@@ -76,7 +75,7 @@ class Taquin extends Component {
 
 	isOver() {
 		this.setState({ active: false });
-		this._storeData(this.state.score + 1);
+		this._storeData();
 	}
 
 	newGame() {

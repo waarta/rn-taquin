@@ -25,9 +25,6 @@ const styles = StyleSheet.create({
 	txt: {
 		fontSize: 28,
 		margin: 10
-	},
-	btn: {
-		height: 20
 	}
 });
 
